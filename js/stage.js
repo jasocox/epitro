@@ -1,17 +1,18 @@
 function setupStage(canvas) {
 
-    this.stage = new createjs.Stage(canvas);
-    this.stage.x = window.innerWidth * 0.5;
-    this.stage.y = window.innerHeight * 0.5;
-    this.stage.canvas.width = window.innerWidth;
-    this.stage.canvas.height = window.innerHeight;
-    this.stage.enableMouseOver();
-    this.stage.mouseMoveOutside = true;
-    this.stage.update();
+    var stage = new createjs.Stage(canvas);
+
+    stage.x = window.innerWidth * 0.5;
+    stage.y = window.innerHeight * 0.5;
+    stage.canvas.width = window.innerWidth;
+    stage.canvas.height = window.innerHeight;
+    stage.enableMouseOver();
+    stage.mouseMoveOutside = true;
+    stage.update();
 
     // Enable Touch
-    createjs.Touch.enable(this.stage);
+    createjs.Touch.enable(stage);
 
-    return this.stage;
+    return stage;
 
 }
