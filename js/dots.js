@@ -17,7 +17,7 @@ function generateDot() {
 function generateParams() {
   deltas = {
     dT: PI / Math.random() * 25,
-    dR: PI / Math.random() * 5,
+    dR: PI / Math.random(),
     a: Math.random(maxRadius / 12),
     b: Math.random(maxRadius / 12),
     c: Math.random(maxRadius / 12)
@@ -33,7 +33,7 @@ function generatePoint() {
       ((currentR + currentRD * deltas.dR) < 0)) {
     currentRD = currentRD * -1;
   }
-  currentR = currentR + currentRD * deltas.dR;
+  currentR = currentR + currentRD * deltas.dR + 0.00000001;
 
   var currentPoint = {
     x: (
