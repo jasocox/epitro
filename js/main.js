@@ -12,8 +12,12 @@ function main() {
 
   setInterval(function() {
     stage.addChild(generateDot());
-    stage.update();
   }, 1);
+
+  createjs.Ticker.framerate = 60;
+  createjs.Ticker.addEventListener("tick", function() {
+    stage.update();
+  });
 
 }
 
