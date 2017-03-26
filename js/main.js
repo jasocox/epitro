@@ -1,17 +1,22 @@
+var SPACE_KEY = 32;
+
 function main() {
 
   // Setup
   var stage = setupStage(document.getElementById("canvas"));
-
-  // Keyboard Test
-  document.onkeydown = keyPressed;
-
-  // Extension Test
-  var extend_test = new ExtendedContainer();
-  extend_test.output();
+  document.onkeydown = function(event) {
+    //Keycodes found at http://keycode.info
+    if (event.keyCode === SPACE_KEY) {
+      generateDeltas();
+      stage.removeAllChildren();
+      stage.update();
+    }
+  };
 
   setInterval(function() {
-    stage.addChild(generateDot());
+    for (var i=0; i<100; i++) {
+      stage.addChild(generateDot());
+    }
   }, 1);
 
   createjs.Ticker.framerate = 60;
@@ -19,13 +24,4 @@ function main() {
     stage.update();
   });
 
-}
-
-var SPACE_KEY = 32;
-
-function keyPressed(event) {
-  //Keycodes found at http://keycode.info
-  if (event.keyCode === SPACE_KEY) {
-    console.log("Pressed: space key");
-  }
 }
