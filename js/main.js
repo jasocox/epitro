@@ -21,9 +21,11 @@ function main() {
 
 }
 
+var SPACE_KEY = 32;
+
 function keyPressed(event) {
   //Keycodes found at http://keycode.info
-  if (event.keyCode === 32) {
-    console.log("testing");
+  if (event.keyCode === SPACE_KEY) {
+    console.log("Pressed: space key");
   }
 }
