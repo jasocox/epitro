@@ -33,7 +33,7 @@ function generatePoint() {
       ((currentR + currentRD * deltas.dR) < 0)) {
     currentRD = currentRD * -1;
   }
-  currentR = currentR + currentRD * deltas.dR + 0.00000001;
+  currentR = currentR + currentRD * deltas.dR + 0.00001;
 
   var currentPoint = {
     x: (
