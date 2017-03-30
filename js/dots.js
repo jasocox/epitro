@@ -1,7 +1,8 @@
 var deltas = {};
+var PI = 3.1415927;
 var maxRadius = (window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight) / 2;
 
-generateDeltas();
+generateParams();
 
 function generateDot() {
   var dot = new createjs.Shape();
@@ -13,32 +14,41 @@ function generateDot() {
   return dot;
 }
 
-function generateDeltas() {
+function generateParams() {
   deltas = {
-    dR: Math.ceil(Math.random() * 3),
-    dT: Math.random()
+    dT: PI / Math.random() * 25,
+    dR: PI / Math.random(),
+    a: Math.random(maxRadius / 12),
+    b: Math.random(maxRadius / 12),
+    c: Math.random(maxRadius / 12)
   };
 }
 
-var currentPoint = {
-  r: 0,
-  rD: 1,
-  t: 0,
-  x: 0,
-  y: 0
-};
+var currentT = 0;
+var currentR = 0;
+var currentRD = 1;
 
 function generatePoint() {
-  if (((currentPoint.r + currentPoint.rD * deltas.dR) > maxRadius) ||
-      ((currentPoint.r + currentPoint.rD * deltas.dR) < 0)) {
-    currentPoint.rD = currentPoint.rD * -1;
+  if (((currentR + currentRD * deltas.dR) > maxRadius) ||
+      ((currentR + currentRD * deltas.dR) < 0)) {
+    currentRD = currentRD * -1;
   }
-  currentPoint.r = currentPoint.r + currentPoint.rD * deltas.dR;
+  currentR = currentR + currentRD * deltas.dR + 0.00001;
 
-  currentPoint.x = Math.cos(currentPoint.t) * currentPoint.r;
-  currentPoint.y = Math.sin(currentPoint.t) * currentPoint.r;
+  var currentPoint = {
+    x: (
+      currentR *
+      ((deltas.a + deltas.b) * Math.cos(currentT)) -
+      (deltas.c * Math.cos(((deltas.a+deltas.b)/deltas.b)*currentT))
+    ),
+    y:  (
+      currentR *
+      ((deltas.a + deltas.b) * Math.sin(currentT)) -
+      (deltas.c * Math.sin(((deltas.a+deltas.b)/deltas.b)*currentT))
+    )
+  };
 
-  currentPoint.t = currentPoint.t + deltas.dT;
+  currentT += deltas.dT;
 
   return currentPoint;
 }

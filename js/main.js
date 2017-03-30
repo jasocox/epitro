@@ -7,7 +7,7 @@ function main() {
   document.onkeydown = function(event) {
     //Keycodes found at http://keycode.info
     if (event.keyCode === SPACE_KEY) {
-      generateDeltas();
+      generateParams();
       stage.removeAllChildren();
       stage.update();
     }
