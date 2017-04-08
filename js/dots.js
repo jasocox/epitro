@@ -8,7 +8,9 @@ function generateDot() {
   var dot = new createjs.Shape();
   var point = generatePoint();
 
-  dot.graphics.beginFill("DeepSkyBlue").drawCircle(point.x, point.y, 1);
+  var color = ["DeepSkyBlue"];//, "#FF0000", "#00FF00", "#0000FF"];
+  var colorSelect = Math.floor(Math.random() * color.length);
+  dot.graphics.beginFill(color[colorSelect]).drawCircle(point.x, point.y, 1);
   dot.originX = dot.x;
 
   return dot;
