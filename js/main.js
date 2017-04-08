@@ -1,40 +1,27 @@
+var SPACE_KEY = 32;
+
 function main() {
 
   // Setup
-  setup();
+  var stage = setupStage(document.getElementById("canvas"));
+  document.onkeydown = function(event) {
+    //Keycodes found at http://keycode.info
+    if (event.keyCode === SPACE_KEY) {
+      generateParams();
+      stage.removeAllChildren();
+      stage.update();
+    }
+  };
 
-  // Keyboard Test
-  document.onkeydown = keyPressed;
+  setInterval(function() {
+    for (var i=0; i<100; i++) {
+      stage.addChild(generateDot());
+    }
+  }, 1);
 
-  // Display Test
-  var testing = new createjs.Shape();
+  createjs.Ticker.framerate = 60;
+  createjs.Ticker.addEventListener("tick", function() {
+    stage.update();
+  });
 
-  //testing.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
-  testing.graphics.beginFill("DeepSkyBlue").rect(0, 0, 50, 50);
-  testing.originX = testing.x;
-  testing.counter = 0;
-  testing.increment = 0.1;
-  testing.amplitude = 50;
-  testing.on("tick", update);
-
-  container.addChild(testing);
-
-  // Extension Test
-  var extend_test = new ExtendedContainer();
-  extend_test.output();
-
-}
-
-function keyPressed(event) {
-  //Keycodes found at http://keycode.info
-  if (event.keyCode === 32) {
-    console.log("testing");
-  }
-}
-
-function update(event) {
-  event.target.x = event.target.originX +
-    Math.sin(event.target.counter) * event.target.amplitude;
-
-  event.target.counter += event.target.increment;
 }
